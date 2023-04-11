@@ -2266,6 +2266,36 @@ class MsfConsole(object):
                 break
         return data
 
+    def exec_check_with_output(self, mod, timeout=301):
+        """
+        Run the check command of a module and wait for the returned data
+
+        Mandatory Arguments:
+        - mod : the MsfModule object
+        """
+        options_str = 'use {}/{}\n'.format(mod.moduletype, mod.modulename)
+        if self.rpc.consoles.console(self.cid).is_busy():
+            raise MsfError('Console {} is busy'.format(self.cid))
+        self.rpc.consoles.console(self.cid).read()  # clear data buffer
+        opts = mod.runoptions.copy()
+
+        # Set module params
+        for k in opts.keys():
+            options_str += 'set {} {}\n'.format(k, opts[k])
+
+        # Run the module without directly opening a command line
+        options_str += 'check'
+        self.rpc.consoles.console(self.cid).write(options_str)
+        data = ''
+        timer = 0
+        while data == '' or self.rpc.consoles.console(self.cid).is_busy():
+            time.sleep(1)
+            data += self.rpc.consoles.console(self.cid).read()['data']
+            timer += 1
+            if timer > timeout:
+                break
+        return data
+
 
 class ConsoleManager(MsfManager):
 
