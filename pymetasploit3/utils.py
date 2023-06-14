@@ -29,7 +29,7 @@ def convert(data, encoding="utf-8"):
     """
     Converts all bytestrings to utf8
     """
-    if isinstance(data, bytes):  return data.decode(encoding=encoding)
+    if isinstance(data, bytes):  return data.decode(encoding=encoding, errors="escape")
     if isinstance(data, list):   return list(map(lambda iter: convert(iter, encoding=encoding), data))
     if isinstance(data, set):    return set(map(lambda iter: convert(iter, encoding=encoding), data))
     if isinstance(data, dict):   return dict(map(lambda iter: convert(iter, encoding=encoding), data.items()))

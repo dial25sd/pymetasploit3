@@ -3,11 +3,12 @@ Pymetasploit3
 
 Pymetasploit3 is a full-fledged Python3 Metasploit automation library. It can interact with Metasploit either through msfrpcd or the msgrpc plugin in msfconsole.
 
-# Original library: pymetasploit
+# Original library: pymetasploit / pymetasploit3
 
-This is an updated and improved version of the Python2 pymetasploit library by allfro.
+pymetasploit3 is an updated and improved version of the Python2 pymetasploit library by allfro.
+This version is an adapted version of pymetasploit3 for usage with the Attack Replay Framework.
 
-Original project  : https://github.com/allfro/pymetasploit
+Original projects  : https://github.com/allfro/pymetasploit, https://github.com/DanMcInerney/pymetasploit3
 
 # Installation
 
